@@ -112,4 +112,4 @@
 本项目采用 [MIT](./LICENSE) 许可。
 
 - 上游模块：© [WhiteBr1ck](https://github.com/WhiteBr1ck)（MIT）
-- AstrBot 移植与维护：pengz
+- AstrBot 移植与维护：1234567890AZ1
