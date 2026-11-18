@@ -1,0 +1,178 @@
+{
+  "enabled": {
+    "type": "bool",
+    "description": "启用生理模块",
+    "default": true,
+    "hint": "模块总开关；暂停后停止后台心跳、提示词注入与消息暂存拦截。"
+  },
+  "groupEnabled": {
+    "type": "bool",
+    "description": "在群聊中也启用",
+    "default": false,
+    "hint": "默认仅私聊生效。开启后群聊同步拥有饥饿、困倦、暂离不插话、熟睡被 @ 概率吵醒等状态，并严格隐藏生理期/如厕等隐私。"
+  },
+  "autonomyMode": {
+    "type": "string",
+    "description": "生活自主模式",
+    "default": "daily",
+    "options": ["daily", "passive"],
+    "hint": "daily：闲时自理三餐如厕，热聊时暂缓并请示主人；passive：全程听令等待主人批准或投喂。"
+  },
+  "heartbeatSec": {
+    "type": "int",
+    "description": "心跳巡检间隔（秒）",
+    "default": 30,
+    "hint": "后台状态检查与暂离归来结算精度，平时零 Token 消耗，范围 5 ~ 300。"
+  },
+  "chatIdleMinutes": {
+    "type": "int",
+    "description": "聊天陪伴保护时长（分钟）",
+    "default": 15,
+    "hint": "跟主人私聊后的该时长内视为「正在热聊」，期间绝不擅自去上厕所、洗澡、睡觉或自己吃饭。范围 3 ~ 120。"
+  },
+  "forceReplyCount": {
+    "type": "int",
+    "description": "暂离 / 睡眠强召回条数",
+    "default": 4,
+    "hint": "上厕所、洗澡或睡觉时，主人连发达到该条数（或发「快回我/急事」）立即中断暂离强制秒回。范围 1 ~ 20。"
+  },
+  "timeZone": {
+    "type": "string",
+    "description": "作息时区",
+    "default": "Asia/Shanghai",
+    "hint": "IANA 时区字符串，用于计算三餐、洗澡、入睡起床与跨天结算。"
+  },
+  "dietEnabled": {
+    "type": "bool",
+    "description": "启用饮食与饥饿系统",
+    "default": true,
+    "hint": "控制饱食度自然消耗、聊天消耗、三餐自理配额与投喂互动。"
+  },
+  "mealTimes": {
+    "type": "string",
+    "description": "早 / 午 / 晚饭点",
+    "default": "08:00, 12:15, 18:30",
+    "hint": "逗号分隔的 HH:MM，每天自动带 ±15 分钟自然作息浮动。"
+  },
+  "dailyMealQuota": {
+    "type": "int",
+    "description": "每日自理正餐配额",
+    "default": 3,
+    "hint": "每天最多自己吃几顿正餐；设为 0 则不自理正餐，纯靠主人投喂。范围 0 ~ 10。"
+  },
+  "chatHungerCost": {
+    "type": "float",
+    "description": "每轮私聊消耗饱食度",
+    "default": 1.8,
+    "hint": "每聊一句额外增加的饥饿值（长消息略增），范围 0 ~ 15。"
+  },
+  "autoMeal": {
+    "type": "bool",
+    "description": "闲时按配额自理三餐",
+    "default": true,
+    "hint": "关闭后即使处于 daily 模式也不会自己吃饭，需主人投喂或批准。"
+  },
+  "hungerNudge": {
+    "type": "bool",
+    "description": "饥饿主动私聊讨食",
+    "default": true,
+    "hint": "配额耗尽仍挨饿或饿极了时主动私聊主人讨食（每天最多 2 次）。"
+  },
+  "bathroomEnabled": {
+    "type": "bool",
+    "description": "启用上厕所暂离",
+    "default": true,
+    "hint": "饮水进食自然攒尿意；闲时自理、热聊请示，暂离期间自动暂存私聊消息。"
+  },
+  "showerEnabled": {
+    "type": "bool",
+    "description": "启用晚间洗澡 + 吹头发",
+    "default": true,
+    "hint": "每晚两段式暂离（洗澡约 14 分钟 + 吹头发约 7 分钟），洗完带松弛余韵。"
+  },
+  "showerAt": {
+    "type": "string",
+    "description": "晚间洗澡时间",
+    "default": "21:30",
+    "hint": "HH:MM，每晚计划洗澡基准时间（每天自动带 ±25 分钟自然浮动）。"
+  },
+  "sleepEnabled": {
+    "type": "bool",
+    "description": "启用睡眠与做梦系统",
+    "default": true,
+    "hint": "睡着后按浅睡（65%）、REM 做梦（30%）、深睡（12%）阶段概率决定能否被消息吵醒。"
+  },
+  "sleepAt": {
+    "type": "string",
+    "description": "平时入睡时间",
+    "default": "23:30",
+    "hint": "HH:MM；到点仍在陪主人热聊时会犯困，但绝不擅自断联入睡。"
+  },
+  "wakeAt": {
+    "type": "string",
+    "description": "平时起床时间",
+    "default": "07:45",
+    "hint": "HH:MM；醒来后自动汇总回复夜间错过的私聊。"
+  },
+  "napEnabled": {
+    "type": "bool",
+    "description": "允许午后犯困小睡",
+    "default": true,
+    "hint": "13:10 ~ 14:00 精力偏低且无人聊天时小睡约 35 分钟。"
+  },
+  "periodEnabled": {
+    "type": "bool",
+    "description": "启用 28 天生理周期",
+    "default": true,
+    "hint": "模拟经期、卵泡期、排卵期、经前 PMS 四阶段，仅对主人私聊展现私密体感。"
+  },
+  "cycleAnchor": {
+    "type": "string",
+    "description": "最近一次经期第 1 天",
+    "default": "",
+    "hint": "YYYY-MM-DD；留空则使用模块内部存档。"
+  },
+  "cycleLength": {
+    "type": "int",
+    "description": "生理周期天数",
+    "default": 28,
+    "hint": "完整生理周期总天数，范围 21 ~ 38。"
+  },
+  "periodDays": {
+    "type": "int",
+    "description": "每次经期持续天数",
+    "default": 5,
+    "hint": "单次月经持续天数，范围 3 ~ 8。"
+  },
+  "periodSeverity": {
+    "type": "string",
+    "description": "经期体感与情绪强度",
+    "default": "heavy",
+    "options": ["heavy", "mild", "intense"],
+    "hint": "heavy：前两天明显坠痛怕冷需哄照顾（推荐）；mild：轻微乏力怕凉；intense：重度痛经。"
+  },
+  "periodNudge": {
+    "type": "bool",
+    "description": "经期难受主动求哄",
+    "default": true,
+    "hint": "经期前两天难受时主动私聊主人求哄照顾（每天最多 1~2 次）。"
+  },
+  "owner_id": {
+    "type": "string",
+    "description": "主人 QQ / 用户 ID",
+    "default": "",
+    "hint": "用于识别主人私聊、投放主动消息与启用主人专属工具。留空时回退到 AstrBot 全局 admins_id。"
+  },
+  "owner_name": {
+    "type": "string",
+    "description": "主人称呼",
+    "default": "主人",
+    "hint": "主动消息与提示词中使用的称呼。"
+  },
+  "owner_umo": {
+    "type": "string",
+    "description": "主人私聊会话 UMO（可选）",
+    "default": "",
+    "hint": "形如 aiocqhttp:FriendMessage:123456。一般留空：插件会在主人首次私聊时自动记录。"
+  }
+}
